@@ -1,4 +1,4 @@
-import { Suspense, use, useMemo, useContext, useEffect, useState } from 'react';
+import { Suspense, use, useMemo, useEffect, useState } from 'react';
 import { ThemeContext } from '../context/themeContext';
 import { getUsers } from '../mockServices';
 import { User } from '../interfaces';
@@ -9,6 +9,7 @@ const UserListWithSuspense = ({
   userPromise: Promise<User[]>;
 }) => {
   const users = use(userPromise);
+
   return users.map((user, index) => (
     <p key={index}>
       {user.name} {user.surname}
@@ -43,7 +44,7 @@ const UserListWithoutSuspense = ({
 };
 
 export const UseExample = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = use(ThemeContext);
 
   const userPromise = useMemo(() => getUsers(), []);
 

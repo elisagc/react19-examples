@@ -1,9 +1,12 @@
-import React, { RefObject, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps {
   ref: RefObject<HTMLInputElement | null>;
 }
-const MyInput = (props: InputProps) => <input {...props} type="text" />;
+
+const MyInput = (props: InputProps) => {
+  return <input type="text" ref={props.ref} />;
+};
 
 export const UseRefExample = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +16,7 @@ export const UseRefExample = () => {
   };
   return (
     <div>
-      <MyInput ref={inputRef} placeholder="Type here..." />
+      <MyInput ref={inputRef} />
       <button onClick={handleFocus}>Focus Input by useRef in parent</button>
     </div>
   );

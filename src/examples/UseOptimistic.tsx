@@ -5,6 +5,7 @@ import { createUser } from '../mockServices';
 type UserWithSending = User & { sending?: boolean };
 
 export const UseOptimisticExample = () => {
+  //Estado final
   const [users, setUsers] = useState<UserWithSending[]>([
     { name: 'John', surname: 'Doe' },
     { name: 'Jane', surname: 'Doe' },
@@ -17,20 +18,20 @@ export const UseOptimisticExample = () => {
     };
     addOptimisticContent(newUser);
     try {
-      const sentMessage = await createUser(newUser);
+      const newDataUser = await createUser(newUser);
 
-      setUsers((prevUsers) => [...prevUsers, sentMessage]);
+      setUsers((prevUsers) => [...prevUsers, newDataUser]);
     } catch (error) {
       console.error(error);
     }
   }
 
+  //Estado provisional
   const [optimisticUsers, addOptimisticContent] = useOptimistic(
     users,
-    (state: UserWithSending[], newUser: User) => [
-      ...state,
-      { ...newUser, sending: true },
-    ]
+    (state: UserWithSending[], newUser: User) => {
+      return [...state, { ...newUser, sending: true }];
+    }
   );
 
   return (
