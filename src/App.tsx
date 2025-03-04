@@ -5,15 +5,17 @@ import { UseActionStateExample } from './examples/UseActionState';
 import { BeforeUseActionState } from './examples/BeforeUseActionState';
 import { UseOptimisticExample } from './examples/UseOptimistic';
 import { UseRefExample } from './examples/UseRef';
+import { LazyExample } from './examples/Lazy';
 
 function App() {
   return (
     <ThemeProvider>
-      {/*    <UseExample /> */}
       {/*    <UseActionStateExample /> */}
       {/*    <BeforeUseActionState />    */}
       {/*    <UseOptimisticExample /> */}
-      <UseRefExample />
+      {/*     <UseRefExample /> */}
+      <UseExample />
+      <LazyExample />
     </ThemeProvider>
   );
 }
